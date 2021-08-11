@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Tag')
+@section('title', 'Category')
 
 @push('css')
 <link href="{{ asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <a href="{{ route('admin.tag.create') }}" class="btn btn-primary waves-effect"><i class="material-icons">add</i><span>Add New Tag</span></a>
+        <a href="{{ route('admin.category.create') }}" class="btn btn-primary waves-effect"><i class="material-icons">add</i><span>Add New Category</span></a>
     </div>
     <!-- Exportable Table -->
     <div class="row clearfix">
@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        ALL TAG <span class="badge bg-blue">{{ $tags->count() }}</span>
+                        ALL CATEGORY <span class="badge bg-blue">{{ $categories->count() }}</span>
                     </h2>
                 </div>
                 <div class="body">
@@ -27,6 +27,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Post Count</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Action</th>
@@ -36,22 +37,24 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Post Count</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach ($tags as $key => $tag)
+                                @foreach ($categories as $key => $category)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $tag->name }}</td>
-                                        <td>{{ $tag->created_at }}</td>
-                                        <td>{{ $tag->updated_at }}</td>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->posts->count()  }}</td>
+                                        <td>{{ $category->created_at }}</td>
+                                        <td>{{ $category->updated_at }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('admin.tag.edit', $tag->id) }}" class="btn btn-info waves-effect"><i class="material-icons">edit</i></a>
-                                            <button class="btn btn-danger waves-effect" type="button" onclick="deleteTag({{ $tag->id }})"><i class="material-icons">delete</i></button>
-                                            <form id="delete-form-{{ $tag->id }}" action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST" style="display: none" >
+                                            <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-info waves-effect"><i class="material-icons">edit</i></a>
+                                            <button class="btn btn-danger waves-effect" type="button" onclick="deleteCategory({{ $category->id }})"><i class="material-icons">delete</i></button>
+                                            <form id="delete-form-{{ $category->id }}" action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: none" >
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -89,7 +92,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-    function deleteTag(id){
+    function deleteCategory(id){
         const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: 'btn btn-success',

@@ -107,6 +107,6 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tag::find($id)->delete();
     }
 }

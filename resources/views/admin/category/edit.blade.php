@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Edit Tag')
+@section('title', 'Edit Category')
 
 @push('css')
     <!-- Sweet Alert Css -->
@@ -16,21 +16,26 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Edit Tag
+                                Edit Category
                             </h2>
                             
                         </div>
                         <div class="body">
-                            <form method="POST" action="{{ route('admin.tag.update', $tag->id) }}">
+                            <form method="POST" action="{{ route('admin.category.update', $category->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="name" id="name" class="form-control" value="{{ $tag->name }}">
-                                        <label class="form-label">Tag Name</label>
+                                        <input type="text" name="name" id="name" class="form-control" value="{{ $category->name }}">
+                                        <label class="form-label">Category Name</label>
                                     </div>
                                 </div>
-                                <a href="{{ route('admin.tag.index') }}" class="btn btn-danger m-t-15 waves-effect"">BACK</a>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="file" name="image">
+                                    </div>
+                                </div>
+                                <a href="{{ route('admin.category.index') }}" class="btn btn-danger m-t-15 waves-effect"">BACK</a>
                                 <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
                             </form>
                         </div>
