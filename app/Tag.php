@@ -14,4 +14,9 @@ class Tag extends Model
     {
         return $this->belongsToMany(Post::class)->withTimestamps();
     }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

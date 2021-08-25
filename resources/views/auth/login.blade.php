@@ -8,6 +8,15 @@
 
 <link href="{{ asset('assets/frontend/css/auth/responsive.css') }}" rel="stylesheet">
 
+<style>
+    .slider{
+    height: 400px;
+    width: 100%;
+    background-image: url('{{ url('images/slider-1.jpg') }}');
+    background-size: cover;
+}
+</style>
+
 @endpush
 
 @section('content')

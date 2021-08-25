@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Tag;
+use App\Tagimage;
+use Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
@@ -46,6 +48,53 @@ class TagController extends Controller
         $tag->name = $request->name;
         $tag->slug = Str_slug($request->name);
         $tag->save();
+
+        // if (count($request->tag_image)>0)
+        // {
+        //     //if($request->hasFile('tag_image'))
+        //     //{
+        //         foreach($request->tag_image as $image)
+        //         {
+                    
+        //            //insert that image
+        //         // $image = $request->file('tag_image');
+        //         $img = time().'.'.$image->getClientOriginalExtension();
+        //         $location = public_path('images/tags/'.$img);
+        //         Image::make($image)->save($location);
+        //         $tag_image = new Tagimage;
+        //         $tag_image->tag_id = $tag->id;
+        //         $tag_image->image = $img;
+        //         $tag_image->save();  
+        //         }
+        // }
+
+        if ($request->hasfile('images')) {
+            $images = $request->file('images');
+
+            foreach($images as $image) {
+                $img = time().'.'.$image->getClientOriginalExtension();
+                $location = public_path('images/tags/'.$img);
+                Image::make($image)->save($location);
+                $insert[] = $img;
+
+                Tagimage::create([
+                    'tag_id' => $tag->id,
+                    'image' => $img,
+                  ]);
+            }
+         }
+
+        //  if($request->hasFile('image')) {
+        //     foreach($request->file('image') as $image) {
+        //         $destinationPath = 'content_images/';
+        //         $filename = $image->getClientOriginalName();
+        //         $image->move($destinationPath, $filename);
+        
+        //     $allImagesPathes[ ]['path'] = $filename;
+        
+        //     }
+        //     $content->images()->createMany($allImagesPathes); // this will save you tens of DB quires
+        // }
 
         Toastr::success('Tag Successfully Save!', 'success');
 

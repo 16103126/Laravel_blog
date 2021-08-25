@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'role_id', 'name', 'username', 'email', 'password',
     ];
 
     /**
@@ -37,4 +37,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    public function favourite_posts()
+    {
+        return $this->belongsToMany(Post::class)->withTimestamps();
+    }
+    
+    Public function comments()
+    {
+    return $this->hasMany(Comment::class);
+    }
+
+    public function scopeAuthors($query)
+    {
+        return $query->where('role_id', 2);
+    }
+
 }

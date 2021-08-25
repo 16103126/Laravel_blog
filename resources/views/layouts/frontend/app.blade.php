@@ -11,6 +11,8 @@
     <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Toastr Notification css -->
+    
+
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
@@ -60,7 +62,7 @@
     </script>
 
     @stack('js')
-
+    
 	<script src="{{ asset('assets/frontend/js/scripts.js') }}"></script>
 
 </body>

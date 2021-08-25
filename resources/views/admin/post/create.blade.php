@@ -13,7 +13,7 @@
 
         <div class="container-fluid">
             <!-- Vertical Layout | With Floating Label -->
-            <form method="post" action="{{ route('admin.post.store') }}">
+            <form method="post" action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
                 @csrf
             <div class="row clearfix">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -39,7 +39,6 @@
                                 <div class="form-group">
                                     <input type="checkbox" id="publish" name="status" class="filled-in" value="1">
                                     <label for="publish">publish</label>
-
                                 </div>
                             
                         </div>

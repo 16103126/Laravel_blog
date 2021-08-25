@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        ALL POST <span>{{ $posts->count() }}</span>
+                        ALL POST <span class="badge bg-blue">{{ $posts->count() }}</span>
                     </h2>
                 </div>
                 <div class="body">
@@ -73,7 +73,8 @@
                                         <td>{{ $post->created_at }}</td>
                                         <td>{{ $post->updated_at }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('admin.post.edit', $posts->post) }}" class="btn btn-info waves-effect"><i class="material-icons">edit</i></a>
+                                            <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-info waves-effect"><i class="material-icons">visibility</i></a>
+                                            <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-info waves-effect"><i class="material-icons">edit</i></a>
                                             <button class="btn btn-danger waves-effect" type="button" onclick="deletePost({{ $post->id }})"><i class="material-icons">delete</i></button>
                                             <form id="delete-form-{{ $post->id }}" action="{{ route('admin.post.destroy', $post->id) }}" method="POST" style="display: none" >
                                                 @csrf

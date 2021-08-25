@@ -21,7 +21,7 @@
                             
                         </div>
                         <div class="body">
-                            <form method="post" action="{{ route('admin.tag.store') }}">
+                            <form method="post" action="{{ route('admin.tag.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group form-float">
                                     <div class="form-line">
@@ -29,6 +29,17 @@
                                         <label class="form-label">Tag Name</label>
                                     </div>
                                 </div>
+
+                                <div class="form-group"> 
+                                    <label for="tag_image">Tag Image</label>
+                                    <div class="row">
+                                    <div class="col-md-4">
+                                      <input type="file" name="images[]" id="tag_image" class="form-control" multiple>
+                                    </div>
+                                   
+                                          </div>
+                                </div>
+
                                 <a href="{{ route('admin.tag.index') }}" class="btn btn-danger m-t-15 waves-effect"">BACK</a>
                                 <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
                             </form>

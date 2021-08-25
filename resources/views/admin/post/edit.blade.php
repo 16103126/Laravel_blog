@@ -13,8 +13,9 @@
 
         <div class="container-fluid">
             <!-- Vertical Layout | With Floating Label -->
-            <form method="post" action="{{ route('admin.post.update') }}">
+            <form method="post" action="{{ route('admin.post.update', $post->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
             <div class="row clearfix">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     <div class="card">
@@ -28,13 +29,14 @@
                             
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" name="title" id="title" class="form-control" value="{{ $post->title }}">
-                                        <label class="form-label">Post Title</label>
+                                        <label class="title">Post Title</label>
+                                        <input type="text" name="title" id="title" class="form-control" value="{{ $post->title }}">  
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label>
-                                    <input type="file" name="image">
+                                    <img src="{{ url('assets/backend/images/post/' . $post->image) }}" width="50px;">
+                                    <input type="file" name="image" value="{{ $post->image }}">
                                 </div>
                                 <div class="form-group">
                                     <input type="checkbox" id="publish" name="status" class="filled-in" value="1" {{ $post->status == true ? 'checked' : '' }}>
@@ -62,7 +64,7 @@
                                             @foreach ($categories as $category)
                                                 <option 
                                                 @foreach ($post->categories as $postCategory)
-                                                {{ $postCategory->id == $category ? 'selected' : ''}}
+                                                {{ $postCategory->id == $category->id ? 'selected' : ''}}
                                                 @endforeach
                                                 value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -76,13 +78,14 @@
                                             @foreach ($tags as $tag)
                                                 <option 
                                                 @foreach ($post->tags as $postTag)
-                                                {{ $postTag->id == $tag ? 'selected' : ''}}
+                                                {{ $postTag->id == $tag->id ? 'selected' : ''}}
                                                 @endforeach
-                                                 value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                                value="{{ $tag->id }}">{{ $tag->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+                                
                                 <a href="{{ route('admin.post.index') }}" class="btn btn-danger m-t-15 waves-effect"">BACK</a>
                                 <button type="submit" class="btn btn-primary m-t-15 waves-effect">SUBMIT</button>
                             

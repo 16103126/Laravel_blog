@@ -19,9 +19,34 @@ class Post extends Model
     {
         return $this->belongsToMany(Category::class)->withTimestamps();
     }
+    // public function getcategories()
+    // {
+    //     return $this->hasMany(CategoryPost::class);
+    // }
 
     public function tags()
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
+
+    public function favourite_to_users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    Public function comments()
+    {
+    return $this->hasMany(Comment::class);
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('is_approved', 1);
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 1);
+    }
+
 }
